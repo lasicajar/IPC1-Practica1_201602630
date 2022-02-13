@@ -9,8 +9,6 @@ public class PacmanPractica1 {
         int fila = 0;
         //ancho
         int colum = 0;
-        //matriz de tablero
-        int tablero[][] = new int[fila + 1][colum];
 
         //Inicializador de contador de jugadores
         int contJugador = 0;
@@ -58,19 +56,21 @@ public class PacmanPractica1 {
                             fila = scgd.nextInt();
                             System.out.print("ancho: ");
                             colum = scgd.nextInt();
-                            if (fila < 8 && colum < 8) {
+                            if (fila < 8 || colum < 8) {
                                 System.out.println("Las dimensiones son muy pequeñas ingrese nuevamente...");
                             } else if (fila < colum) {
-                                colum = fila - 1;
+                                colum = fila;
                             } else {
                                 System.out.println("Iniciando Juego...");
                             }
-                        } while (fila < 8 && colum < 8);
-                        //System.out.println("alto: "+ fila +" ancho "+ colum);
+                        } while (fila < 8 || colum < 8);
+                        System.out.println("alto: "+ fila +" ancho: "+ colum);
 
                         //Inicializando Juego
                         punteo[contJugador] = 10;
                         movi[contJugador] = 0;
+                        //matriz de tablero
+                        int tablero[][] = new int[fila+1][colum+1];
 
                         do {
                             System.out.println("\t Nombre:  " + nombre[contJugador]);
@@ -79,10 +79,10 @@ public class PacmanPractica1 {
 
                             //Dibujando Matriz
                             for (int i = 0; i < tablero.length; i++) {
-                                for (int j = 0; j < tablero[j].length; j++) {
+                                for (int j = 0; j < tablero[i].length; j++) {
+                                    
                                     if (tablero[i] == tablero[posy] & tablero[j] == tablero[posx]) {
                                         System.out.print(" V ");
-
                                     } else if (tablero[i] == tablero[fila / 2] & tablero[j] == tablero[0] || tablero[i] == tablero[(fila / 2) + 1]) {
                                         System.out.print("   ");
 
@@ -92,7 +92,6 @@ public class PacmanPractica1 {
                                     } else {
                                         System.out.print(" * ");
                                     }
-
                                 }
                                 //Segundo if que imprime la última columna
                                 if (tablero[i] == tablero[fila / 2] || tablero[i] == tablero[(fila / 2) + 1]) {
@@ -103,11 +102,14 @@ public class PacmanPractica1 {
 
                             }
                             //Segundo for fuera para imprimir última línea horizontal.
-                            for (int i = 0; i < tablero[i].length; i++) {
+                            for (int i = 0; i < tablero.length; i++) {
                                 System.out.print(" * ");
                             }
                             System.out.println(" *");
-
+                            
+                            
+                            
+                            //Recepcipon de tecla a introducir
                             System.out.print("Seleccione comando:");
                             valor = scg.nextLine();
                             if (valor.equalsIgnoreCase("m")) {
