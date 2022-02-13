@@ -25,9 +25,9 @@ public class PacmanPractica1 {
         Scanner scgd = new Scanner(System.in);
 
         boolean menu = false;
-        boolean entrada=false;
-        String valor ;
-        
+        boolean entrada = false;
+        String valor;
+
         int posy = 6;
         int posx = 5;
 
@@ -67,28 +67,54 @@ public class PacmanPractica1 {
                             }
                         } while (fila < 8 && colum < 8);
                         //System.out.println("alto: "+ fila +" ancho "+ colum);
-                        
 
-                        //Dibujando Matriz
+                        //Inicializando Juego
                         punteo[contJugador] = 10;
                         movi[contJugador] = 0;
-                       
+
                         do {
-                            System.out.println("\t Nombre:  "+ nombre[contJugador]);
-                            System.out.println("\t Punteo:  "+ punteo[contJugador]);
-                            System.out.println("\t Movimientos: "+ movi[contJugador]);
-                            
-                            
-                            
-                            System.out.print("Seleccione comando:"); 
+                            System.out.println("\t Nombre:  " + nombre[contJugador]);
+                            System.out.println("\t Punteo:  " + punteo[contJugador]);
+                            System.out.println("\t Movimientos: " + movi[contJugador]);
+
+                            //Dibujando Matriz
+                            for (int i = 0; i < tablero.length; i++) {
+                                for (int j = 0; j < tablero[j].length; j++) {
+                                    if (tablero[i] == tablero[posy] & tablero[j] == tablero[posx]) {
+                                        System.out.print(" V ");
+
+                                    } else if (tablero[i] == tablero[fila / 2] & tablero[j] == tablero[0] || tablero[i] == tablero[(fila / 2) + 1]) {
+                                        System.out.print("   ");
+
+                                    } else if (tablero[j] != tablero[0] & tablero[i] != tablero[0]) {
+                                        System.out.print("   ");
+
+                                    } else {
+                                        System.out.print(" * ");
+                                    }
+
+                                }
+                                //Segundo if que imprime la última columna
+                                if (tablero[i] == tablero[fila / 2] || tablero[i] == tablero[(fila / 2) + 1]) {
+                                    System.out.println("  ");
+                                } else {
+                                    System.out.println(" *");
+                                }
+
+                            }
+                            //Segundo for fuera para imprimir última línea horizontal.
+                            for (int i = 0; i < tablero[i].length; i++) {
+                                System.out.print(" * ");
+                            }
+                            System.out.println(" *");
+
+                            System.out.print("Seleccione comando:");
                             valor = scg.nextLine();
                             if (valor.equalsIgnoreCase("m")) {
-                                entrada=true;
+                                entrada = true;
                             }
                         } while (!entrada);
 
-                        
-                        
                         //Contador de partida del jugador
                         contJugador++;
                         entrada = false;
