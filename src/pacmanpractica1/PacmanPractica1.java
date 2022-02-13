@@ -12,14 +12,24 @@ public class PacmanPractica1 {
         //matriz de tablero
         int tablero[][] = new int[fila + 1][colum];
 
-        //String datos[][] = new String[10][1];
+        //Inicializador de contador de jugadores
         int contJugador = 0;
-        String nombre[] = new String[5];
-        String edad[] = new String[5];
+        //Vectores de Datos a guardar
+        String nombre[] = new String[10];
+        String edad[] = new String[10];
+        int punteo[] = new int[10];
+        int movi[] = new int[10];
+        //Scanner global de cadena de String
         Scanner scg = new Scanner(System.in);
+        //Scanner globar de enteros
         Scanner scgd = new Scanner(System.in);
 
         boolean menu = false;
+        boolean entrada=false;
+        String valor ;
+        
+        int posy = 6;
+        int posx = 5;
 
         do {
             try {
@@ -40,7 +50,7 @@ public class PacmanPractica1 {
                         nombre[contJugador] = scg.nextLine();
                         System.out.print("Ingrese Edad del Jugador:  ");
                         edad[contJugador] = scg.nextLine();
-                        
+
                         //Recibiendo las dimensiones del tablero de juego
                         System.out.println("Ingrese las dimensiones del tablero mayor a 8x8...");
                         do {
@@ -50,18 +60,38 @@ public class PacmanPractica1 {
                             colum = scgd.nextInt();
                             if (fila < 8 && colum < 8) {
                                 System.out.println("Las dimensiones son muy pequeñas ingrese nuevamente...");
+                            } else if (fila < colum) {
+                                colum = fila - 1;
                             } else {
-                                System.out.println("dimensiones guardadas...");
+                                System.out.println("Iniciando Juego...");
                             }
                         } while (fila < 8 && colum < 8);
-
-                        System.out.println("alto: " + fila + " ancho: " + colum);
+                        //System.out.println("alto: "+ fila +" ancho "+ colum);
                         
+
                         //Dibujando Matriz
-                        
+                        punteo[contJugador] = 10;
+                        movi[contJugador] = 0;
+                       
+                        do {
+                            System.out.println("\t Nombre:  "+ nombre[contJugador]);
+                            System.out.println("\t Punteo:  "+ punteo[contJugador]);
+                            System.out.println("\t Movimientos: "+ movi[contJugador]);
+                            
+                            
+                            
+                            System.out.print("Seleccione comando:"); 
+                            valor = scg.nextLine();
+                            if (valor.equalsIgnoreCase("m")) {
+                                entrada=true;
+                            }
+                        } while (!entrada);
 
+                        
+                        
                         //Contador de partida del jugador
                         contJugador++;
+                        entrada = false;
 
                         break;
                     case 2:
@@ -73,6 +103,8 @@ public class PacmanPractica1 {
                                 System.out.println("_____________________________");
                                 System.out.println("Nombre: " + nombre[i]);
                                 System.out.println("Edad: " + edad[i]);
+                                System.out.println("Punteo: " + punteo[i]);
+                                System.out.println("Movimientos: " + movi[i]);
                             } else {
                                 System.out.println(" ");
                             }
