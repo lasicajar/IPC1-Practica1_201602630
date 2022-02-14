@@ -26,9 +26,6 @@ public class PacmanPractica1 {
         boolean entrada = false;
         String valor;
 
-        int posy = 6;
-        int posx = 5;
-
         do {
             try {
                 System.out.println("**************************");
@@ -61,16 +58,42 @@ public class PacmanPractica1 {
                             } else if (fila < colum) {
                                 colum = fila;
                             } else {
-                                System.out.println("Iniciando Juego...");
+                                System.out.print("Iniciando Juego...");
                             }
                         } while (fila < 8 || colum < 8);
-                        System.out.println("alto: "+ fila +" ancho: "+ colum);
+                        System.out.println("   alto: " + fila + " ancho: " + colum);
 
                         //Inicializando Juego
                         punteo[contJugador] = 10;
                         movi[contJugador] = 0;
                         //matriz de tablero
-                        int tablero[][] = new int[fila+1][colum+1];
+                        int tablero[][] = new int[fila + 1][colum + 1];
+
+                        //Posición de obtaculos
+                        //posición de pared fila
+                        int paredy = (int) (Math.random() * (fila / 4) + 1);
+                        //posición de pared columna
+                        int paredx = (int) (Math.random() * (colum / 4) + 1);
+
+                        //posición de pacman fila
+                        int posy = (int) (Math.random() * fila + 1);
+                        //posición de pacman columna
+                        int posx = (int) (Math.random() * colum + 1);
+
+                        //posición de hashta fila
+                        int hashy = (int) (Math.random() * fila + 1);
+                        //posición de pacman columna
+                        int hashx = (int) (Math.random() * colum + 1);
+
+                        //posición de dolar fila
+                        int dolary = (int) (Math.random() * fila + 1);
+                        //posición de dolar columna
+                        int dolarx = (int) (Math.random() * colum + 1);
+
+                        //posición de dolar fila
+                        int arrobay = (int) (Math.random() * fila + 1);
+                        //posición de dolar columna
+                        int arrobax = (int) (Math.random() * colum + 1);
 
                         do {
                             System.out.println("\t Nombre:  " + nombre[contJugador]);
@@ -80,9 +103,26 @@ public class PacmanPractica1 {
                             //Dibujando Matriz
                             for (int i = 0; i < tablero.length; i++) {
                                 for (int j = 0; j < tablero[i].length; j++) {
-                                    
+
                                     if (tablero[i] == tablero[posy] & tablero[j] == tablero[posx]) {
                                         System.out.print(" V ");
+                                    } else if (tablero[i] == tablero[hashy] & tablero[j] == tablero[hashx]) {
+                                        System.out.print(" # ");
+                                    } else if (tablero[i] == tablero[dolary] & tablero[j] == tablero[dolarx]) {
+                                        System.out.print(" $ ");
+                                    } else if (tablero[i] == tablero[arrobay] & tablero[j] == tablero[arrobax]) {
+                                        System.out.print(" @ ");
+
+                                        //IMPRESION DE OBTACULOS
+                                    } else if (tablero[i] == tablero[paredy] & tablero[j] == tablero[paredx]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[paredy + 1] & tablero[j] == tablero[paredx]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[paredy + 2] & tablero[j] == tablero[paredx]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[paredy + 3] & tablero[j] == tablero[paredx]) {
+                                        System.out.print(" * ");
+                                        //IMPRESION DE CENTROS EN BLANCO
                                     } else if (tablero[i] == tablero[fila / 2] & tablero[j] == tablero[0] || tablero[i] == tablero[(fila / 2) + 1]) {
                                         System.out.print("   ");
 
@@ -106,15 +146,44 @@ public class PacmanPractica1 {
                                 System.out.print(" * ");
                             }
                             System.out.println(" *");
-                            
-                            
-                            
+
                             //Recepcipon de tecla a introducir
                             System.out.print("Seleccione comando:");
                             valor = scg.nextLine();
-                            if (valor.equalsIgnoreCase("m")) {
+
+                            if (valor.equalsIgnoreCase("m")||punteo[contJugador]<1||punteo[contJugador]>99) {
+                                System.out.println("\t ¡¡¡¡¡¡GAME OVER!!!!!!");
                                 entrada = true;
+                            } else if (valor.equalsIgnoreCase("w")) {
+                                posy--;
+                                movi[contJugador]++;
+                            } else if (valor.equalsIgnoreCase("s")) {
+                                posy++;
+                                movi[contJugador]++;
+                            } else if (valor.equalsIgnoreCase("a")) {
+                                posx--;
+                                movi[contJugador]++;
+                            } else if (valor.equalsIgnoreCase("d")) {
+                                posx++;
+                                movi[contJugador]++;
+                            } else {
+                                System.out.println("Movimiento incorrecto...");
                             }
+                            //Validación punteo hashta
+                            if (tablero[posy] == tablero[hashy] & tablero[posx] == tablero[hashx]) {
+                                punteo[contJugador] = punteo[contJugador] - 10;
+                                hashy = (int) (Math.random() * fila + 1);
+                                hashx = (int) (Math.random() * colum + 1);
+                            } else if (tablero[posy] == tablero[dolary] & tablero[posx] == tablero[dolarx]) {
+                                punteo[contJugador] = punteo[contJugador] +15;
+                                dolary = (int) (Math.random() * fila + 1);
+                                dolarx = (int) (Math.random() * colum + 1);
+                            } else if (tablero[posy] == tablero[arrobay] & tablero[posx] == tablero[arrobax]) {
+                                punteo[contJugador] = punteo[contJugador]+10;
+                                arrobay = (int) (Math.random() * fila + 1);
+                                arrobax = (int) (Math.random() * colum + 1);
+                            }
+
                         } while (!entrada);
 
                         //Contador de partida del jugador
