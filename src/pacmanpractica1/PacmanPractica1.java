@@ -71,9 +71,21 @@ public class PacmanPractica1 {
 
                         //Posición de obtaculos
                         //posición de pared fila
-                        int paredy = (int) (Math.random() * (fila / 4) + 1);
+                        int paredy = (int) (Math.random() * (fila / 2) + 2);
                         //posición de pared columna
-                        int paredx = (int) (Math.random() * (colum / 4) + 1);
+                        int paredx = (int) (Math.random() * (colum / 2) + 2);
+                        //posición de pared fila
+                        int pared2y = (int) (Math.random() * (fila / 2) + 2);
+                        //posición de pared columna
+                        int pared2x = (int) (Math.random() * (colum / 2) + 2);
+                        //posición de pared fila
+                        int pared3y = (int) (Math.random() * (fila / 2) + 3);
+                        //posición de pared columna
+                        int pared3x = (int) (Math.random() * (colum / 2) + 3);
+                        //posición de pared fila
+                        int pared4y = (int) (Math.random() * (fila / 2) + 2);
+                        //posición de pared columna
+                        int pared4x = (int) (Math.random() * (colum / 2) + 2);
 
                         //posición de pacman fila
                         int posy = (int) (Math.random() * fila + 1);
@@ -122,8 +134,38 @@ public class PacmanPractica1 {
                                         System.out.print(" * ");
                                     } else if (tablero[i] == tablero[paredy + 3] & tablero[j] == tablero[paredx]) {
                                         System.out.print(" * ");
+                                        //IMPRESION DE OBTACULOS
+                                    } else if (tablero[i] == tablero[pared2y] & tablero[j] == tablero[pared2x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared2y + 1] & tablero[j] == tablero[pared2x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared2y + 2] & tablero[j] == tablero[pared2x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared2y + 3] & tablero[j] == tablero[pared2x]) {
+                                        System.out.print(" * ");
+                                        //IMPRESION DE OBTACULOS
+                                    } else if (tablero[i] == tablero[pared3y] & tablero[j] == tablero[pared3x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared3y + 1] & tablero[j] == tablero[pared3x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared3y + 2] & tablero[j] == tablero[pared3x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared3y + 3] & tablero[j] == tablero[pared3x]) {
+                                        System.out.print(" * ");
+                                        
+                                            //IMPRESION DE OBTACULOS
+                                    } else if (tablero[i] == tablero[pared4y] & tablero[j] == tablero[pared4x]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared4y] & tablero[j] == tablero[pared4x+1]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared4y] & tablero[j] == tablero[pared4x+2]) {
+                                        System.out.print(" * ");
+                                    } else if (tablero[i] == tablero[pared4y] & tablero[j] == tablero[pared4x+3]) {
+                                        System.out.print(" * ");
+                                        
+                                        
                                         //IMPRESION DE CENTROS EN BLANCO
-                                    } else if (tablero[i] == tablero[fila / 2] & tablero[j] == tablero[0] || tablero[i] == tablero[(fila / 2) + 1]) {
+                                    } else if (tablero[i] == tablero[fila / 2] & tablero[j] == tablero[0] /*|| tablero[i] == tablero[(fila / 2) + 1]*/) {
                                         System.out.print("   ");
 
                                     } else if (tablero[j] != tablero[0] & tablero[i] != tablero[0]) {
@@ -134,7 +176,7 @@ public class PacmanPractica1 {
                                     }
                                 }
                                 //Segundo if que imprime la última columna
-                                if (tablero[i] == tablero[fila / 2] || tablero[i] == tablero[(fila / 2) + 1]) {
+                                if (tablero[i] == tablero[fila / 2] /*|| tablero[i] == tablero[(fila / 2) + 1]*/) {
                                     System.out.println("  ");
                                 } else {
                                     System.out.println(" *");
@@ -150,8 +192,13 @@ public class PacmanPractica1 {
                             //Recepcipon de tecla a introducir
                             System.out.print("Seleccione comando:");
                             valor = scg.nextLine();
+                            if (tablero[posy] == tablero[fila / 2] & tablero[posx] == tablero[0]) {
+                                posx = colum;
+                            } else if (tablero[posy] == tablero[fila / 2] & tablero[posx] == tablero[colum]) {
+                                posx = 0;
+                            }
 
-                            if (valor.equalsIgnoreCase("m")||punteo[contJugador]<1||punteo[contJugador]>99) {
+                            if (valor.equalsIgnoreCase("m") || punteo[contJugador] < 1 || punteo[contJugador] > 99) {
                                 System.out.println("\t ¡¡¡¡¡¡GAME OVER!!!!!!");
                                 entrada = true;
                             } else if (valor.equalsIgnoreCase("w")) {
@@ -163,6 +210,7 @@ public class PacmanPractica1 {
                             } else if (valor.equalsIgnoreCase("a")) {
                                 posx--;
                                 movi[contJugador]++;
+
                             } else if (valor.equalsIgnoreCase("d")) {
                                 posx++;
                                 movi[contJugador]++;
@@ -175,11 +223,11 @@ public class PacmanPractica1 {
                                 hashy = (int) (Math.random() * fila + 1);
                                 hashx = (int) (Math.random() * colum + 1);
                             } else if (tablero[posy] == tablero[dolary] & tablero[posx] == tablero[dolarx]) {
-                                punteo[contJugador] = punteo[contJugador] +15;
+                                punteo[contJugador] = punteo[contJugador] + 15;
                                 dolary = (int) (Math.random() * fila + 1);
                                 dolarx = (int) (Math.random() * colum + 1);
                             } else if (tablero[posy] == tablero[arrobay] & tablero[posx] == tablero[arrobax]) {
-                                punteo[contJugador] = punteo[contJugador]+10;
+                                punteo[contJugador] = punteo[contJugador] + 10;
                                 arrobay = (int) (Math.random() * fila + 1);
                                 arrobax = (int) (Math.random() * colum + 1);
                             }
